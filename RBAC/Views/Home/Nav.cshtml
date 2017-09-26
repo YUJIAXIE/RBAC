@@ -1,0 +1,8 @@
+﻿@model IEnumerable<RBAC.Models.Module>
+<ul>
+    <li>@Html.ActionLink("首页","Index","Home")</li>
+    @foreach (var item in Model)
+    {
+        <li>@Html.ActionLink(item.Name,"Index",item.Controller)</li>
+    }
+</ul>

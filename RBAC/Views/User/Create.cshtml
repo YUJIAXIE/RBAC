@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/_LayoutForm.cshtml";
+}
+<form class="bootstrap-frm" action="@Url.Action("Save")">
+    <h1>用户管理 - 新增</h1>
+    <label>
+        <span>用户名称</span>
+        <input type="text" name="username" placeholder="请输入名称" />
+    </label>
+    <label>
+        <span>用户密码</span>
+        <input type="text" name="password" placeholder="请输入密码" />
+    </label>
+    <label>
+        <span>&nbsp;</span>
+        <input type="button" class="button" value="保存" />
+    </label>
+</form>

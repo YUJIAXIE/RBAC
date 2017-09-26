@@ -1,0 +1,26 @@
+﻿@model RBAC.ViewModels.RoleModuleViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_LayoutForm.cshtml";
+}
+<form class="bootstrap-frm" action="@Url.Action("Update")">
+    <h1>角色模块 - 编辑</h1>
+    <input type="hidden" name="RoleId" value="@Model.RoleId" />
+    <input type="hidden" name="ModuleId" value="@Model.ModuleId" />
+    <label>
+        <span>角色名称</span>
+        <input type="text" name="RoleName" value="@Model.RoleName" disabled="disabled" />
+    </label>
+    <label>
+        <span>模块名称</span>
+        <input type="text" name="ModuleName" value="@Model.ModuleName" disabled="disabled" />
+    </label>
+    <label>
+        <span>选择模块</span>
+        @Html.DropDownList("UpdateModuleId",(IEnumerable<SelectListItem>)ViewBag.ModuleOptions)
+    </label>
+    <label>
+        <span>&nbsp;</span>
+        <input type="button" class="button" value="保存" />
+    </label>
+</form>

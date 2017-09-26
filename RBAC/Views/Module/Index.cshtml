@@ -1,0 +1,84 @@
+﻿@model IEnumerable<RBAC.Models.Module>
+@{
+    ViewBag.Title = "模块管理";
+}
+@Html.ActionLink("新增", "Create", null, new { id = "create" })
+<table>
+    <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>控制器</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Controller</td>
+            <td style="width: 100px;">
+                @Html.ActionLink("编辑", "Edit", new { id = item.Id }, new { @class = "edit" })
+                @Html.ActionLink("删除", "Delete", new { id = item.Id }, new { @class = "delete" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Script
+{
+    <script>
+        $(function () {
+            $('#create').click(function (event) {
+                layer.open({
+                    type: 2,
+                    title: '@ViewBag.Title',
+                    shadeClose: true,
+                    shade: false,
+                    area: ['500px', '400px'],
+                    content: '@Url.Action("Create")'
+                });
+                event.preventDefault();
+            });
+
+            $('.edit').click(function (event) {
+                var href = $(this).attr("href");
+                layer.open({
+                    type: 2,
+                    title: '@ViewBag.Title',
+                    shadeClose: true,
+                    shade: false,
+                    area: ['500px', '400px'],
+                    content: href
+                });
+                event.preventDefault();
+            });
+            $('.delete').click(function (event) {
+                var href = $(this).attr("href");
+                layer.msg('该模块可能关联到其他角色，确定要删除？', {
+                    time: 0 //不自动关闭
+                      , btn: ['必须这样干', '我不敢']
+                      , yes: function (index) {
+                          layer.close(index);
+                          layer.msg('删除后可能导致你没工作', {
+                              icon: 6
+                            , btn: ['没什么大不了的', '算了'],
+                            yes: function (index1) {
+                                layer.close(index1)
+                                  $.ajax({
+                                      url: href,
+                                      type: 'post',
+                                      success: function () {
+                                          layer.close(index1);
+                                          window.location.reload();
+                                      }
+                                  })
+                              }
+                          });
+                      }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
+}			

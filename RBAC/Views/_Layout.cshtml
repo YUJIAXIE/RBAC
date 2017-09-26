@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="~/Content/css/site.css" rel="stylesheet" />
+    <link href="~/Content/css/table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/layer/layer.js"></script>
+    @RenderSection("Style", false)
+</head>
+<body>
+    <header>
+        @Html.Action("Header","Home")
+    </header>
+    <div id="body">
+        <nav>
+            @Html.Action("Nav","Home")
+        </nav>
+        <main>
+            <h2>@ViewBag.Title</h2>
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        ASP.NET MVC 5 - RBAC权限管理案例： RBAC Demo
+    </footer>
+    @RenderSection("Script", false)
+    <script>
+        $(function () {
+            $("#role-select").change(function () {
+                var roleId = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("Nav","Home")',
+                    data: { 'roleId': roleId },
+                    success: function (data) {
+                        $("nav").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

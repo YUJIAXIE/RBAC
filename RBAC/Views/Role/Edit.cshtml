@@ -1,0 +1,20 @@
+﻿@model RBAC.Models.Role
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/_LayoutForm.cshtml";
+}
+<form class="bootstrap-frm" action="@Url.Action("Save")">
+    <h1>权限管理 - 编辑</h1>
+    <label>
+        <span>ID：</span>
+        <input type="text" name="id" value="@Model.Id" readonly="readonly" />
+    </label>
+    <label>
+        <span>权限名称</span>
+        <input type="text" name="name" value="@Model.Name" placeholder="请输入用户密码" />
+    </label>
+    <label>
+        <span>&nbsp;</span>
+        <input type="button" class="button" value="保存" />
+    </label>
+</form>
